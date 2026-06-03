@@ -255,8 +255,8 @@ const MovieDetailsPage = () => {
 
         {reviews && reviews.length > 0 ? (
           <Stack spacing={2} sx={{ mb: 3 }}>
-            {reviews.map((r, i) => (
-              <Paper key={i} variant="outlined" sx={{ p: 2 }}>
+            {reviews.map((r) => (
+              <Paper key={`${r.reviewerId}-${r.date}`} variant="outlined" sx={{ p: 2 }}>
                 <Typography variant="subtitle2" color="primary">
                   {r.reviewerId}
                 </Typography>
