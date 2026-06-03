@@ -23,6 +23,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import FavouriteMoviesPage from "./pages/FavouriteMoviesPage";
 import FavouriteActorsPage from "./pages/FavouriteActorsPage";
+import MovieSearchPage from "./pages/MovieSearchPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -57,6 +58,7 @@ const App = () => (
                   <Route path="/actors/:id" element={<ActorDetailsPage />} />
                   <Route path="/login" element={<LoginPage />} />
                   <Route path="/register" element={<RegisterPage />} />
+                  <Route path="/search" element={<MovieSearchPage />} />
 
                   <Route
                     path="/movies/favourites"
