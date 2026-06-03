@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import type { FantasyMovie, Playlist } from "../types/movieTypes";
 
 type MoviesContextType = {
@@ -40,9 +40,6 @@ const load = <T,>(key: string, fallback: T): T => {
   }
 };
 
-const save = <T,>(key: string, value: T) =>
-  localStorage.setItem(key, JSON.stringify(value));
-
 export const MoviesProvider = ({ children }: { children: ReactNode }) => {
   const [favouriteMovies, setFavMovies] = useState<number[]>(() =>
     load("fav_movies", []),
@@ -57,21 +54,29 @@ export const MoviesProvider = ({ children }: { children: ReactNode }) => {
     load("playlists", []),
   );
 
+  useEffect(() => {
+    localStorage.setItem("fav_movies", JSON.stringify(favouriteMovies));
+  }, [favouriteMovies]);
+
+  useEffect(() => {
+    localStorage.setItem("fav_actors", JSON.stringify(favouriteActors));
+  }, [favouriteActors]);
+
+  useEffect(() => {
+    localStorage.setItem("fantasy_movies", JSON.stringify(fantasyMovies));
+  }, [fantasyMovies]);
+
+  useEffect(() => {
+    localStorage.setItem("playlists", JSON.stringify(playlists));
+  }, [playlists]);
+
   // FAVOURITE MOVIE
 
   const addFavouriteMovie = (id: number) =>
-    setFavMovies((p) => {
-      const n = [...p, id];
-      save("fav_movies", n);
-      return n;
-    });
+    setFavMovies((p) => (p.includes(id) ? p : [...p, id]));
 
   const removeFavouriteMovie = (id: number) =>
-    setFavMovies((p) => {
-      const n = p.filter((x) => x !== id);
-      save("fav_movies", n);
-      return n;
-    });
+    setFavMovies((p) => p.filter((x) => x !== id));
 
   const isFavouriteMovie = (id: number) => favouriteMovies.includes(id);
 
@@ -81,7 +86,6 @@ export const MoviesProvider = ({ children }: { children: ReactNode }) => {
       if (idx <= 0) return prev;
       const next = [...prev];
       [next[idx - 1], next[idx]] = [next[idx], next[idx - 1]];
-      save("fav_movies", next);
       return next;
     });
 
@@ -91,84 +95,55 @@ export const MoviesProvider = ({ children }: { children: ReactNode }) => {
       if (idx === -1 || idx === prev.length - 1) return prev;
       const next = [...prev];
       [next[idx], next[idx + 1]] = [next[idx + 1], next[idx]];
-      save("fav_movies", next);
       return next;
     });
 
   // FAVOURITE ACTOR
 
   const addFavouriteActor = (id: number) =>
-    setFavActors((p) => {
-      const n = [...p, id];
-      save("fav_actors", n);
-      return n;
-    });
+    setFavActors((p) => (p.includes(id) ? p : [...p, id]));
 
   const removeFavouriteActor = (id: number) =>
-    setFavActors((p) => {
-      const n = p.filter((x) => x !== id);
-      save("fav_actors", n);
-      return n;
-    });
+    setFavActors((p) => p.filter((x) => x !== id));
 
   const isFavouriteActor = (id: number) => favouriteActors.includes(id);
 
   // FANTASY MOVIES
 
   const addFantasyMovie = (movie: FantasyMovie) =>
-    setFantasyMovies((p) => {
-      const n = [...p, movie];
-      save("fantasy_movies", n);
-      return n;
-    });
+    setFantasyMovies((p) => [...p, movie]);
 
   const removeFantasyMovie = (id: string) =>
-    setFantasyMovies((p) => {
-      const n = p.filter((m) => m.id !== id);
-      save("fantasy_movies", n);
-      return n;
-    });
+    setFantasyMovies((p) => p.filter((m) => m.id !== id));
 
   // PLAYLISTS
 
   const createPlaylist = (title: string, theme: string) =>
-    setPlaylists((p) => {
-      const n = [
-        ...p,
-        { id: Date.now().toString(), title, theme, movieIds: [] },
-      ];
-      save("playlists", n);
-      return n;
-    });
+    setPlaylists((p) => [
+      ...p,
+      { id: crypto.randomUUID(), title, theme, movieIds: [] },
+    ]);
 
   const deletePlaylist = (id: string) =>
-    setPlaylists((p) => {
-      const n = p.filter((pl) => pl.id !== id);
-      save("playlists", n);
-      return n;
-    });
+    setPlaylists((p) => p.filter((pl) => pl.id !== id));
 
   const addMovieToPlaylist = (playlistId: string, movieId: number) =>
-    setPlaylists((p) => {
-      const n = p.map((pl) =>
+    setPlaylists((p) =>
+      p.map((pl) =>
         pl.id === playlistId && !pl.movieIds.includes(movieId)
           ? { ...pl, movieIds: [...pl.movieIds, movieId] }
           : pl,
-      );
-      save("playlists", n);
-      return n;
-    });
+      ),
+    );
 
   const removeMovieFromPlaylist = (playlistId: string, movieId: number) =>
-    setPlaylists((p) => {
-      const n = p.map((pl) =>
+    setPlaylists((p) =>
+      p.map((pl) =>
         pl.id === playlistId
           ? { ...pl, movieIds: pl.movieIds.filter((id) => id !== movieId) }
           : pl,
-      );
-      save("playlists", n);
-      return n;
-    });
+      ),
+    );
 
   return (
     <MoviesContext.Provider
