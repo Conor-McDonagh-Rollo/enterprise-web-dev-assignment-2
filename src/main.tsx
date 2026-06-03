@@ -16,6 +16,9 @@ import { MoviesProvider } from "./contexts/MoviesContext";
 import { ProtectedRoute } from "./components/protectedRoute/ProtectedRoute";
 import SiteHeader from "./components/siteHeader/SiteHeader";
 import HomePage from "./pages/HomePage";
+import MovieDetailsPage from "./pages/MovieDetailsPage";
+import ActorListPage from "./pages/ActorListPage";
+import ActorDetailsPage from "./pages/ActorDetailsPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -44,6 +47,10 @@ const App = () => (
               <Container component="main" sx={{ py: 4 }}>
                 <Routes>
                   <Route path="/" element={<HomePage />} />
+
+                  <Route path="/movies/:id" element={<MovieDetailsPage />} />
+                  <Route path="/actors" element={<ActorListPage />} />
+                  <Route path="/actors/:id" element={<ActorDetailsPage />} />
                 </Routes>
               </Container>
             </Box>
