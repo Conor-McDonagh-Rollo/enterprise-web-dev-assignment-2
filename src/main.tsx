@@ -24,6 +24,7 @@ import RegisterPage from "./pages/RegisterPage";
 import FavouriteMoviesPage from "./pages/FavouriteMoviesPage";
 import FavouriteActorsPage from "./pages/FavouriteActorsPage";
 import MovieSearchPage from "./pages/MovieSearchPage";
+import FantasyMoviePage from "./pages/FantasyMoviePage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -73,6 +74,14 @@ const App = () => (
                     element={
                       <ProtectedRoute>
                         <FavouriteActorsPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/fantasy-movie"
+                    element={
+                      <ProtectedRoute>
+                        <FantasyMoviePage />
                       </ProtectedRoute>
                     }
                   />
