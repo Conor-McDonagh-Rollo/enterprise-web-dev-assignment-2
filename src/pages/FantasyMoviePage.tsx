@@ -141,7 +141,7 @@ const FantasyMoviePage = () => {
               type="date"
               value={releaseDate}
               onChange={(e) => setReleaseDate(e.target.value)}
-              InputLabelProps={{ shrink: true }}
+              slotProps={{ inputLabel: { shrink: true } }}
               sx={{ width: 180 }}
             />
           </Box>
@@ -276,7 +276,7 @@ const FantasyMoviePage = () => {
               sx={{ p: 1.5, display: "flex", alignItems: "center", gap: 2 }}
             >
               <Box sx={{ flexGrow: 1 }}>
-                <Typography variant="body2" fontWeight="bold">
+                <Typography variant="body2" sx={{ fontWeight: "bold" }}>
                   {m.name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
@@ -355,7 +355,7 @@ const FantasyMoviePage = () => {
                     <Typography
                       variant="caption"
                       color="text.secondary"
-                      display="block"
+                      sx={{ display: "block" }}
                     >
                       Cast: {m.cast.map((c) => c.name).join(", ")}
                     </Typography>

@@ -34,7 +34,7 @@ const ActorCard = ({ actor }: { actor: Actor }) => {
           </Avatar>
         }
         title={
-          <Typography variant="subtitle1" fontWeight="bold" noWrap>
+          <Typography variant="subtitle1" noWrap sx={{ fontWeight: "bold" }}>
             {actor.name}
           </Typography>
         }

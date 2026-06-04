@@ -149,8 +149,8 @@ const MovieDetailsPage = () => {
               <Typography
                 variant="subtitle1"
                 color="text.secondary"
-                fontStyle="italic"
                 gutterBottom
+                sx={{ fontStyle: "italic" }}
               >
                 "{movie.tagline}"
               </Typography>
@@ -186,7 +186,7 @@ const MovieDetailsPage = () => {
               <Typography color="text.secondary">{movie.status}</Typography>
             </Box>
 
-            <Typography variant="body1" paragraph>
+            <Typography variant="body1" sx={{ mb: 2 }}>
               {movie.overview}
             </Typography>
 

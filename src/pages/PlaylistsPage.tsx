@@ -69,11 +69,10 @@ const PlaylistMovie = ({
       <Box sx={{ flexGrow: 1, minWidth: 0 }}>
         <Typography
           variant="body2"
-          fontWeight="bold"
           noWrap
           component={Link}
           to={`/movies/${data.id}`}
-          sx={{ textDecoration: "none", color: "inherit", display: "block" }}
+          sx={{ fontWeight: "bold", textDecoration: "none", color: "inherit", display: "block" }}
         >
           {data.title}
         </Typography>

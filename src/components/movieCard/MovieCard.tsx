@@ -47,7 +47,7 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
           <Avatar sx={{ bgcolor: "primary.main" }}>{movie.title?.[0]}</Avatar>
         }
         title={
-          <Typography variant="subtitle1" fontWeight="bold" noWrap>
+          <Typography variant="subtitle1" noWrap sx={{ fontWeight: "bold" }}>
             {movie.title}
           </Typography>
         }

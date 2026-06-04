@@ -103,7 +103,7 @@ const MovieSearchPage = () => {
               type="number"
               size="small"
               sx={{ width: 140 }}
-              inputProps={{ min: 1900, max: 2030 }}
+              slotProps={{ htmlInput: { min: 1900, max: 2030 } }}
             />
 
             <FormControl size="small" sx={{ width: 140 }}>

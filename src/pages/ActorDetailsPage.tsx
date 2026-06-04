@@ -157,17 +157,16 @@ const ActorDetailsPage = () => {
                 />
                 <Typography
                   variant="caption"
-                  display="block"
                   noWrap
-                  sx={{ mt: 0.5 }}
+                  sx={{ display: "block", mt: 0.5 }}
                 >
                   {m.title}
                 </Typography>
                 <Typography
                   variant="caption"
                   color="text.secondary"
-                  display="block"
                   noWrap
+                  sx={{ display: "block" }}
                 >
                   {m.character}
                 </Typography>
