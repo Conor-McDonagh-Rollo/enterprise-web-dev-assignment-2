@@ -25,6 +25,7 @@ import FavouriteMoviesPage from "./pages/FavouriteMoviesPage";
 import FavouriteActorsPage from "./pages/FavouriteActorsPage";
 import MovieSearchPage from "./pages/MovieSearchPage";
 import FantasyMoviePage from "./pages/FantasyMoviePage";
+import PlaylistsPage from "./pages/PlaylistsPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -74,6 +75,14 @@ const App = () => (
                     element={
                       <ProtectedRoute>
                         <FavouriteActorsPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/playlists"
+                    element={
+                      <ProtectedRoute>
+                        <PlaylistsPage />
                       </ProtectedRoute>
                     }
                   />

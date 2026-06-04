@@ -10,6 +10,7 @@ import {
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import DeleteIcon from "@mui/icons-material/Delete";
+import StarIcon from "@mui/icons-material/Star";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getMovieDetails, posterUrl } from "../api/tmdbApi";
@@ -61,9 +62,12 @@ const FavouriteMovieRow = ({
           {data.release_date?.slice(0, 4)} ·{" "}
           {data.genres.map((g) => g.name).join(", ")}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          ⭐ {data.vote_average.toFixed(1)}
-        </Typography>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+          <StarIcon fontSize="small" sx={{ color: "warning.main" }} />
+          <Typography variant="body2" color="text.secondary">
+            {data.vote_average.toFixed(1)}
+          </Typography>
+        </Box>
       </Box>
 
       <Box sx={{ display: "flex", flexDirection: "column" }}>

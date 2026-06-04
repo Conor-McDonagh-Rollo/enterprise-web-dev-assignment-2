@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import MovieIcon from "@mui/icons-material/Movie";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
@@ -48,8 +49,9 @@ const SiteHeader = () => {
           <Button
             color="inherit"
             onClick={(e) => setMoviesAnchor(e.currentTarget)}
+            endIcon={<ArrowDropDownIcon />}
           >
-            Movies ▾
+            Movies
           </Button>
           <Menu
             anchorEl={moviesAnchor}
@@ -101,8 +103,9 @@ const SiteHeader = () => {
               <Button
                 color="inherit"
                 onClick={(e) => setMyStuffAnchor(e.currentTarget)}
+                endIcon={<ArrowDropDownIcon />}
               >
-                My Stuff ▾
+                My Stuff
               </Button>
               <Menu
                 anchorEl={myStuffAnchor}
